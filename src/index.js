@@ -1,8 +1,5 @@
-
-
 const express = require("express");
 const UsersRouter = require('./users/users.router');
-// const prisma = new PrismaClient();
 
 const app = express();
 
