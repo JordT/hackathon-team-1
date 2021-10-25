@@ -18,7 +18,7 @@ connection = typeorm.createConnection({
    ] 
 });
 
-const userController = UserController(connection);
+const userController = UserController();
 
 const router = Router();
 

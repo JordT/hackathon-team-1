@@ -1,7 +1,7 @@
 var typeorm = require("typeorm"); 
 var EntitySchema = typeorm.EntitySchema; 
 
-function UserController (connection) {
+function UserController () {
 
     const test4Test = async (req, res, next) => {
         // console.log(connection);
