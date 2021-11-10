@@ -15,5 +15,13 @@
     "pg": "^8.7.1",
     "typeorm": "^0.2.38"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/totipu/sharecare-post.git"
+  },
+  "bugs": {
+    "url": "https://github.com/totipu/sharecare-post/issues"
+  },
+  "homepage": "https://github.com/totipu/sharecare-post#readme"
 }

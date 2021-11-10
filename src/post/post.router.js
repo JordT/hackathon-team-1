@@ -17,7 +17,7 @@ connection = typeorm.createConnection({
    entities: [ new EntitySchema(require("../entity/post.json")) 
    ] 
 });
-
+console.log(connection);
 const postController = PostController();
 
 const router = Router();

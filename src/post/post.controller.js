@@ -9,7 +9,7 @@ function PostController () {
             conn = typeorm.getConnection();
             postRepo = await conn.getRepository("Post");
             result = await postRepo.create(req.body);
-            //TBD: get userId from User logged in, get mediaId from Media service, get CharityId
+            //TBD: create orchestrator service to: get userId (create user service?) from User logged in, get mediaId from Media service, get CharityId
             post = await postRepo.save(result);
             return res.status(200).json(post);
         } catch (error) {
