@@ -37,7 +37,7 @@ var EntitySchema = typeorm.EntitySchema;
 connection = typeorm.createConnection({ 
     "type": "postgres", 
     "host": "localhost", 
-    "port": 54320, 
+    "port": 5432, 
     "username": "postgres", 
     "password": "cibona2!", 
     "database": "typeorm_test_db",
