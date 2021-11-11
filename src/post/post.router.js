@@ -7,17 +7,17 @@ var EntitySchema = typeorm.EntitySchema;
 
 connection = typeorm.createConnection({ 
    "type": "postgres", 
-   "host": "localhost", 
-   "port": 54320, 
-   "username": "postgres", 
-   "password": "cibona2!", 
-   "database": "typeorm_post_db",
+   "host": process.env.HOST, 
+   "port": process.env.PORT, 
+   "username": process.env.USERNAME, 
+   "password": process.env.PASSWORD, 
+   "database": process.env.DATABASE,
    "synchronize": true, 
    "logging": false, 
    entities: [ new EntitySchema(require("../entity/post.json")) 
    ] 
 });
-console.log(connection);
+
 const postController = PostController();
 
 const router = Router();
