@@ -1,6 +1,7 @@
 var typeorm = require("typeorm");
 var EntitySchema = typeorm.EntitySchema;
 let express = require('express');
+const { post } = require("./post.router");
 
 function PostController () {
     
@@ -22,7 +23,12 @@ function PostController () {
         try {
             conn = typeorm.getConnection();
             postRepo = await conn.getRepository("Post");
-            posts = await postRepo.find();            
+            posts = await postRepo.find();
+
+            posts.forEach(function (post) {
+                post.mediaUrl = "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg";
+            });
+
             return res.status(200).json(posts);
         } catch (error) {
             return res.status(500).json({ "error": error.message });
