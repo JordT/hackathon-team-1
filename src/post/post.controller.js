@@ -1,10 +1,13 @@
 var typeorm = require("typeorm");
 var EntitySchema = typeorm.EntitySchema;
-let express = require('express');
-const { post } = require("./post.router");
 
 function PostController () {
     
+    const test4Test = async (req, res, next) => {
+        // console.log(connection);
+        return res.status(200).json({ "test": "test" });
+    }
+
     const createPost = async (req, res) => {
         try {
             conn = typeorm.getConnection();
@@ -35,15 +38,15 @@ function PostController () {
         }
     }
 
-    // const getCharityById = async (req, res) => {
+    // const getPostById = async (req, res) => {
 
     //     const { id } = req.params;
 
     //     try {
     //         conn = typeorm.getConnection();
-    //         charityRepo = await conn.getRepository("Charity");
-    //         charity = await charityRepo.find({ id: parseInt(id) });
-    //         return res.status(200).json(charity);
+    //         postRepo = await conn.getRepository("Post");
+    //         post = await postRepo.find({ id: parseInt(id) });
+    //         return res.status(200).json(post);
     //     } catch (error) {
     //         return res.status(500).json({ "error": error.message });
     //     }
@@ -110,18 +113,13 @@ function PostController () {
     }
 
     return {
+        test4Test,
         createPost,
         getAllPosts,
         updatePost,
         updatePostFunds,
-        deletePost
-        // createCharity,
-        // getAllCharities,
-        // getCharityById,
-        // getCharityFundsById,
-        // updateCharity,
-        // updateCharityFunds,
-        // deleteCharity
+        deletePost,
+        //getPostById
     };
 }
 
