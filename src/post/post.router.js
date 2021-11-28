@@ -14,7 +14,7 @@ connection = typeorm.createConnection({
    "database": process.env.DATABASE_NAME,
    "synchronize": true, 
    "logging": false, 
-   entities: [ new EntitySchema(require("../entity/post.json")) 
+   entities: [ new EntitySchema(require("../entity/post.json"))
    ] 
 });
 
@@ -23,7 +23,7 @@ const postController = PostController();
 const router = Router();
 
 router.post('/posts', postController.createPost);
-//router.get('/posts/:id', postController.getPostById);
+///router.get('/posts/:id', postController.getPostById);
 //router.get('/posts/funds/:id', postController.getPostFundsById);
 router.get('/posts', postController.getAllPosts);
 router.put('/posts/:id', postController.updatePost);

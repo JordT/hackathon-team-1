@@ -8,11 +8,19 @@
        }, 
        "charityId": { 
           "type": "int" 
-       }, 
+       },
+       "charityName": {
+          "type": "varchar",
+          "nullable": true
+       },
        "userId": { 
          "type": "int"
       },
-         "mediaId": { 
+      "userName": {
+         "type": "varchar",
+         "nullable": true
+      },
+      "mediaId": { 
          "type": "int" 
       }, 
        "description": { 

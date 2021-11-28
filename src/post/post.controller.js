@@ -1,9 +1,14 @@
 var typeorm = require("typeorm");
 var EntitySchema = typeorm.EntitySchema;
-let express = require('express');
+const request = require('request-promise');
 
 function PostController () {
     
+    const test4Test = async (req, res, next) => {
+        // console.log(connection);
+        return res.status(200).json({ "test": "test" });
+    }
+
     const createPost = async (req, res) => {
         try {
             conn = typeorm.getConnection();
@@ -22,22 +27,37 @@ function PostController () {
         try {
             conn = typeorm.getConnection();
             postRepo = await conn.getRepository("Post");
-            posts = await postRepo.find();            
-            return res.status(200).json(posts);
+            posts = await postRepo.find();
+
+            requesturl = 'http://sharecare.tipuric.com/media/';
+            
+            for(var i = 0; i<posts.length; i++)
+                {
+                var options = {
+                    uri: requesturl + posts[i].id,
+                    method: "GET",
+                    json: true
+                };
+                var result = await request(options);
+                    console.log(result[0].url);
+                    posts[i].mediaUrl = result[0].url;
+                }
+
+            return await res.status(200).json(posts);
         } catch (error) {
             return res.status(500).json({ "error": error.message });
         }
     }
 
-    // const getCharityById = async (req, res) => {
+    // const getPostById = async (req, res) => {
 
     //     const { id } = req.params;
 
     //     try {
     //         conn = typeorm.getConnection();
-    //         charityRepo = await conn.getRepository("Charity");
-    //         charity = await charityRepo.find({ id: parseInt(id) });
-    //         return res.status(200).json(charity);
+    //         postRepo = await conn.getRepository("Post");
+    //         post = await postRepo.find({ id: parseInt(id) });
+    //         return res.status(200).json(post);
     //     } catch (error) {
     //         return res.status(500).json({ "error": error.message });
     //     }
@@ -104,18 +124,13 @@ function PostController () {
     }
 
     return {
+        test4Test,
         createPost,
         getAllPosts,
         updatePost,
         updatePostFunds,
-        deletePost
-        // createCharity,
-        // getAllCharities,
-        // getCharityById,
-        // getCharityFundsById,
-        // updateCharity,
-        // updateCharityFunds,
-        // deleteCharity
+        deletePost,
+        //getPostById
     };
 }
 
