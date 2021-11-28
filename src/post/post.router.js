@@ -7,11 +7,11 @@ var EntitySchema = typeorm.EntitySchema;
 
 connection = typeorm.createConnection({ 
    "type": "postgres", 
-   "host": "totipulocationsvcdb.postgres.database.azure.com", 
-   "port": "5432", 
-   "username": "totipu@totipulocationsvcdb", 
-   "password": "industrija2!", 
-   "database": "sharecare-post",
+   "host": process.env.DATABASE_HOST, 
+   "port": process.env.DATABASE_PORT, 
+   "username": process.env.DATABASE_USERNAME, 
+   "password": process.env.DATABASE_PASSWORD, 
+   "database": process.env.DATABASE_NAME,
    "synchronize": true, 
    "logging": false, 
    entities: [ new EntitySchema(require("../entity/post.json"))
