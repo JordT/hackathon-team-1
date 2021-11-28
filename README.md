@@ -1,7 +1,11 @@
-# Awesome Project Build with TypeORM
+# ShareCare User API
 
-Steps to run this project:
+## Environment variables
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+| Variable name | Value |
+| --- | --- |
+|DATABASE_HOST|database hostname|
+|DATABASE_PORT|database port|
+|DATABASE_NAME|name of the database
+|DATABASE_USERNAME|username of the database user|
+|DATABASE_PASSWORD|password of the database user|
