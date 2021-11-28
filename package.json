@@ -6,6 +6,8 @@
         "express": "^4.17.1",
         "pg": "^8.7.1",
         "postgres": "^1.0.2",
+        "request": "^2.81.0",
+        "request-promise": "^4.2.6",
         "typeorm": "^0.2.38"
     },
     "scripts": {

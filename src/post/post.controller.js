@@ -1,5 +1,6 @@
 var typeorm = require("typeorm");
 var EntitySchema = typeorm.EntitySchema;
+const request = require('request-promise');
 
 function PostController () {
     
@@ -28,11 +29,21 @@ function PostController () {
             postRepo = await conn.getRepository("Post");
             posts = await postRepo.find();
 
-            posts.forEach(function (post) {
-                post.mediaUrl = "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg";
-            });
+            requesturl = 'http://sharecare.tipuric.com/media/';
+            
+            for(var i = 0; i<posts.length; i++)
+                {
+                var options = {
+                    uri: requesturl + posts[i].id,
+                    method: "GET",
+                    json: true
+                };
+                var result = await request(options);
+                    console.log(result[0].url);
+                    posts[i].mediaUrl = result[0].url;
+                }
 
-            return res.status(200).json(posts);
+            return await res.status(200).json(posts);
         } catch (error) {
             return res.status(500).json({ "error": error.message });
         }
