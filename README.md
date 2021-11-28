@@ -1,7 +1,13 @@
-# Awesome Project Build with TypeORM
+# ShareCare Post API
 
-Steps to run this project:
+In order to run the API you'll need to set the following environment variables.
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+## Environment variables
+
+| Variable name | Value |
+| --- | --- |
+|DATABASE_HOST|database hostname|
+|DATABASE_PORT|database port|
+|DATABASE_NAME|name of the database
+|DATABASE_USERNAME|username of the database user|
+|DATABASE_PASSWORD|password of the database user|
