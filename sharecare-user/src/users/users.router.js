@@ -1,5 +1,3 @@
-// REMOVE THIS COMMENT
-
 const UserController = require('./users.controller');
 const { Router } = require('express');
 

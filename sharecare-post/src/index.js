@@ -1,5 +1,3 @@
-// REMOVE THIS COMMENT
-
 const express = require("express");
 const PostRouter = require('./post/post.router');
 

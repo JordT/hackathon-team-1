@@ -1,4 +1,3 @@
-// REMOVE THIS COMMENT
 
 const PostController = require('./post.controller');
 const { Router } = require('express');

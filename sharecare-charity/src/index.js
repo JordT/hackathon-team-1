@@ -1,4 +1,3 @@
-// REMOVE THIS COMMENT
 
 const express = require("express");
 const CharitiesRouter = require('./charities/charity.router');
