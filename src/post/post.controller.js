@@ -31,7 +31,7 @@ function PostController () {
             postRepo = await conn.getRepository("Post");
             posts = await postRepo.find();
 
-            requesturl = 'http://sharecare.tipuric.com/media/';
+            requesturl = '/media/';
             
             for(var i = 0; i<posts.length; i++)
                 {
