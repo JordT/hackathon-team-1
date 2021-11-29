@@ -48,7 +48,6 @@ test('Should create a new charity ', async () => {
     const conn = typeorm.getConnection();
     const outCharity = await conn.getRepository("Charity").find();
     expect(res.status).toBeCalledWith(200);
-    console.log(outCharity);
     expect(outCharity.length).toBe(1);
     expect(res.json).toBeCalledWith(charity);    
 });
@@ -90,7 +89,6 @@ test('Should list all charities', async () => {
 
 test('Should return a specific charity', async () => {
 
-    // TO BE IMPLEMENTED
     let charityController = CharityController();
 
     // create charity json object
@@ -111,11 +109,20 @@ test('Should return a specific charity', async () => {
         }
     ];
     
+    const conn = typeorm.getConnection();
+    charityRepo = await conn.getRepository("Charity")
+    result = await charityRepo.create(charities);
+    await charityRepo.save(result);
+
     // select charity from database
-    //router.get('/charities/:id', charityController.getCharityById);
+    const req = expressMock.getMockReq({params: { id: 1 }});
+    const { res, next, mockClear } = expressMock.getMockRes()
+
+    await charityController.getCharityById(req, res);
 
     // check result
-    
+    expect(res.status).toBeCalledWith(200);
+    expect(res.json).toBeCalledWith([charities[0]]); 
 });
 
 test('Should update a specific charity', async () => {
@@ -159,7 +166,7 @@ test('Should update a specific charity', async () => {
     await charityController.updateCharity(req, res);
 
     expect(res.status).toBeCalledWith(200);
-    
+
     outCharities = await conn.getRepository("Charity").find({ id: 1 });
     expect(outCharities.length).toBe(1);
     expect(outCharities[0]).toStrictEqual(charities[0]);
@@ -171,6 +178,45 @@ test('Should update a specific charity', async () => {
 
 test('Should delete a specific charity', async () => {
     
-    // TO BE IMPLEMENTED
+    let charityController = CharityController();
+
+    // create charity json objects
+    const charities = [
+        {
+            id: 1,
+            name: 'Rich Charity',
+            description: 'Rich rich charity helps everybody',
+            createdByUser: 'Mark Rich',
+            funds: 340000
+        },
+        {
+            id: 2,
+            name: 'Medium Rich Charity',
+            description: 'Medium rich charity helps everybody',
+            createdByUser: 'Mark Medium Rich',
+            funds: 140000
+        }
+    ];
     
+    const conn = typeorm.getConnection();
+    charityRepo = await conn.getRepository("Charity")
+    result = await charityRepo.create(charities);
+    await charityRepo.save(result);
+
+    const req = expressMock.getMockReq({params: { id: 1 }});
+    const { res, next, mockClear } = expressMock.getMockRes()
+
+
+    await charityController.deleteCharity(req, res);
+    expect(res.status).toBeCalledWith(200); 
+    
+    result = await conn.getRepository("Charity").find({id: 1})
+    expect(result.length).toBe(0);
+
+    result = await conn.getRepository("Charity").find({id: 2})
+    expect(result.length).toBe(1);
+    expect(result).toStrictEqual([charities[1]])
+
+
+        
 });
