@@ -217,6 +217,4 @@ test('Should delete a specific charity', async () => {
     expect(result.length).toBe(1);
     expect(result).toStrictEqual([charities[1]])
 
-
-        
 });
