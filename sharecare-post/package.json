@@ -11,7 +11,7 @@
         "typeorm": "^0.2.38"
     },
     "scripts": {
-        "test": "jest -i --detectOpenHandles",
+        "test": "jest -i --detectOpenHandles --coverage",
         "start": "node src/index.js"
     },
     "devDependencies": {

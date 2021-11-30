@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1638280296223" clover="3.2.0">
-  <project timestamp="1638280296223" name="All files">
+<coverage generated="1638281721959" clover="3.2.0">
+  <project timestamp="1638281721960" name="All files">
     <metrics statements="61" coveredstatements="36" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="6" elements="69" coveredelements="42" complexity="0" loc="61" ncloc="61" packages="1" files="1" classes="1"/>
     <file name="post.controller.js" path="/Users/georgepiatek/repo/hackathon/Team1/hackathon-team-1/sharecare-post/src/post/post.controller.js">
       <metrics statements="61" coveredstatements="36" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="6"/>

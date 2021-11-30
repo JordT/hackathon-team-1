@@ -4,7 +4,7 @@
   "description": "Awesome project developed with TypeORM.",
   "main": "index.js",
   "scripts": {
-    "test": "jest -i",
+    "test": "jest -i --coverage",
     "start": "node src/index.js"
   },
   "keywords": [],
