@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1638281863450" clover="3.2.0">
+  <project timestamp="1638281863450" name="All files">
+    <metrics statements="38" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6" elements="44" coveredelements="40" complexity="0" loc="38" ncloc="38" packages="1" files="1" classes="1"/>
+    <file name="media.controller.js" path="/Users/adamheeps/development/hackathon-team-1/sharecare-media/src/media/media.controller.js">
+      <metrics statements="38" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="6" count="5" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="11" count="5" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="19" count="0" type="stmt"/>
+      <line num="23" count="5" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="30" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+      <line num="33" count="0" type="stmt"/>
+      <line num="38" count="5" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
+      <line num="42" count="1" type="stmt"/>
+      <line num="43" count="1" type="stmt"/>
+      <line num="44" count="1" type="stmt"/>
+      <line num="45" count="1" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="48" count="0" type="stmt"/>
+      <line num="52" count="5" type="stmt"/>
+      <line num="53" count="1" type="stmt"/>
+      <line num="55" count="1" type="stmt"/>
+      <line num="56" count="1" type="stmt"/>
+      <line num="57" count="1" type="stmt"/>
+      <line num="58" count="1" type="stmt"/>
+      <line num="59" count="1" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="65" count="5" type="stmt"/>
+      <line num="74" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
