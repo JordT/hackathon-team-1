@@ -9,7 +9,7 @@
         "typeorm": "^0.2.38"
     },
     "scripts": {
-        "test": "jest -i",
+        "test": "jest -i --coverage",
         "start": "node src/index.js"
     },
     "devDependencies": {
