@@ -33,6 +33,7 @@ lib-cov
 # Coverage directory used by tools like istanbul
 *.lcov
 
+
 # nyc test coverage
 .nyc_output
 
@@ -126,4 +127,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
->>>>>>> sharecare-post
