@@ -98,7 +98,6 @@ test('Should update a specific post', async () => {
     await postRepo.save(result);
 
     outPosts = await conn.getRepository("Post").find();
-    console.log(outPosts);
 
     const postToUpdate = {
         charityName: 'S C',
@@ -178,4 +177,80 @@ test('Should delete a specific post', async () => {
     expect(result.length).toBe(1);
     expect(result).toStrictEqual([posts[1]])       
     
+});
+
+
+test('Should list top 3 posts by funding', async () => {
+    let postController = PostController();
+
+    const posts = [
+        {
+            id: 1,
+            charityId: 1,
+            charityName: 'One charity',
+            mediaId: 1,
+            userId: 1,
+            userName: 'Marko Maric',
+            description: 'blablabla',
+            funds: 0
+        },
+        {
+            id: 2,
+            charityId: 2,
+            charityName: 'Some Charity',
+            mediaId: 2,
+            userId: 2,
+            userName: 'Pero Peric',
+            description: 'Some description',
+            funds: 0
+        }
+        ,
+        {
+            id: 3,
+            charityId: 2,
+            charityName: 'Some Charity',
+            mediaId: 2,
+            userId: 2,
+            userName: 'Pero Peric',
+            description: 'Some description',
+            funds: 1
+        }
+        ,
+        {
+            id: 4,
+            charityId: 2,
+            charityName: 'Some Charity',
+            mediaId: 2,
+            userId: 2,
+            userName: 'Pero Peric',
+            description: 'Some description',
+            funds: 34.2
+        }
+        ,
+        {
+            id: 5,
+            charityId: 2,
+            charityName: 'Some Charity',
+            mediaId: 2,
+            userId: 2,
+            userName: 'Pero Peric',
+            description: 'Some description',
+            funds: 100
+        }
+    ];
+
+    // prepare the reality in the database
+    const conn = typeorm.getConnection();
+    postRepo = await conn.getRepository("Post")
+    result = await postRepo.create(posts);
+    await postRepo.save(result);
+    
+    expectedPosts = [posts[4], posts[3], posts[2]]
+
+    const req = expressMock.getMockReq({ });
+    const { res, next, mockClear } = expressMock.getMockRes()
+
+    await postController.getTop3PostsByFunds(req, res);
+    expect(res.status).toBeCalledWith(200);
+    expect(res.json).toBeCalledWith(expectedPosts);
 });

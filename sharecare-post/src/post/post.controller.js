@@ -50,6 +50,27 @@ function PostController () {
         }
     }
 
+    const getTop3PostsByFunds = async (req, res) => {
+        try {
+            conn = typeorm.getConnection();
+            postRepo = await conn.getRepository("Post");
+            posts = await postRepo.find({
+
+                order: {
+                
+                funds: "DESC",
+                
+                },
+                
+                take: 3
+                
+                });            
+            return res.status(200).json(posts);
+        } catch (error) {
+            return res.status(500).json({ "error": error.message });
+        }
+    }
+
     // const getPostById = async (req, res) => {
 
     //     const { id } = req.params;
@@ -131,6 +152,7 @@ function PostController () {
         updatePost,
         updatePostFunds,
         deletePost,
+        getTop3PostsByFunds,
         //getPostById
     };
 }
