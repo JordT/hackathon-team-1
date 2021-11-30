@@ -17,7 +17,14 @@
     "devDependencies": {
         "@jest-mock/express": "^1.4.5",
         "jest": "^27.3.1",
+        "jest-sonar-reporter": "^2.0.0",
+        "sonarqube-scanner": "^2.8.1",
         "sqlite3": "^5.0.2",
         "supertest": "^6.1.6"
-    }
+    },
+    "jestSonar": {
+        "reportPath": "reports",
+        "reportFile": "test-reporter.xml",
+        "indent": 4
+      }
 }
