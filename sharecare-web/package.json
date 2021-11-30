@@ -15,6 +15,13 @@
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.1"
+    "@nuxtjs/vuetify": "^1.12.1",
+    "sonarqube-scanner": "^2.8.1",
+    "jest-sonar-reporter": "^2.0.0"
+  },
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "test-reporter.xml",
+    "indent": 4
   }
 }
