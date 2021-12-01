@@ -4,7 +4,18 @@ const { Router } = require('express');
 var typeorm = require("typeorm"); 
 var EntitySchema = typeorm.EntitySchema; 
 
-
+// connection = typeorm.createConnection({ 
+//    "type": "postgres", 
+//    "host": "0.0.0.0", 
+//    "port": 5432, 
+//    "username": "postgres", 
+//    "password": "foo", 
+//    "database": process.env.DATABASE_NAME,
+//    "synchronize": true, 
+//    "logging": false, 
+//    entities: [ new EntitySchema(require("../entity/user.json")) 
+//    ] 
+//    });
 connection = typeorm.createConnection({ 
    "type": "postgres", 
    "host": process.env.DATABASE_HOST, 
