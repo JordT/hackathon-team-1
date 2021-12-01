@@ -1,4 +1,3 @@
-
 var typeorm = require("typeorm");
 var EntitySchema = typeorm.EntitySchema;
 const request = require('request-promise');
@@ -29,43 +28,26 @@ function PostController () {
             conn = typeorm.getConnection();
             postRepo = await conn.getRepository("Post");
             posts = await postRepo.find();
-
-            requesturl = '/media/';
             
+            requesturl = process.env.MEDIA_SERVICE_URL + '/media/';
+
             for(var i = 0; i<posts.length; i++)
-                {
+            {
                 var options = {
-                    uri: requesturl + posts[i].id,
+                    uri: requesturl + posts[i].mediaId,
                     method: "GET",
                     json: true
                 };
+                
                 var result = await request(options);
+
+                if (result.length > 0) {
                     console.log(result[0].url);
                     posts[i].mediaUrl = result[0].url;
                 }
+            }
 
             return await res.status(200).json(posts);
-        } catch (error) {
-            return res.status(500).json({ "error": error.message });
-        }
-    }
-
-    const getTop3PostsByFunds = async (req, res) => {
-        try {
-            conn = typeorm.getConnection();
-            postRepo = await conn.getRepository("Post");
-            posts = await postRepo.find({
-
-                order: {
-                
-                funds: "DESC",
-                
-                },
-                
-                take: 3
-                
-                });            
-            return res.status(200).json(posts);
         } catch (error) {
             return res.status(500).json({ "error": error.message });
         }
@@ -152,7 +134,6 @@ function PostController () {
         updatePost,
         updatePostFunds,
         deletePost,
-        getTop3PostsByFunds,
         //getPostById
     };
 }
