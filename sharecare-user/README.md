@@ -13,3 +13,5 @@ In order to run the API you'll need to set the following environment variables.
 |DATABASE_NAME|name of the database
 |DATABASE_USERNAME|username of the database user|
 |DATABASE_PASSWORD|password of the database user|
+
+docker run -p 3000:3000 --network=<whateveryouwant> <user api container name>
