@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: charity-api
-    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity:latest
     env:
     - name: DATABASE_HOST
       value: "35.195.26.117" 
@@ -33,14 +33,14 @@ metadata:
 spec:
   containers:
   - name: media-api
-    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-media
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-media:latest
     env:
     - name: DATABASE_HOST
       value: "35.195.26.117"
     - name: DATABASE_PORT
       value: "5432"
     - name: DATABASE_NAME
-      value: "charity"
+      value: "media"
     - name: DATABASE_USERNAME
       value: "postgres"
     - name: DATABASE_PASSWORD
@@ -56,15 +56,15 @@ metadata:
     app: backend-api
 spec:
   containers:
-  - name: charity-api
-    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-post
+  - name: post-api
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-post:latest
     env:
     - name: DATABASE_HOST
       value: "35.195.26.117" 
     - name: DATABASE_PORT
       value: "5432"
     - name: DATABASE_NAME
-      value: "charity"
+      value: "post"
     - name: DATABASE_USERNAME
       value: "postgres"
     - name: DATABASE_PASSWORD
@@ -80,8 +80,33 @@ metadata:
     app: backend-api
 spec:
   containers:
+  - name: user-api
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-user:latest
+    env:
+    - name: DATABASE_HOST
+      value: "35.195.26.117" 
+    - name: DATABASE_PORT
+      value: "5432"
+    - name: DATABASE_NAME
+      value: "user"
+    - name: DATABASE_USERNAME
+      value: "postgres"
+    - name: DATABASE_PASSWORD
+      value: "hackPassword1!"
+---
+### Front End Web App
+### hit me at: 130.211.106.19:80
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sharecare-frontend
+  labels:
+    purpose: sharecare-app
+    app: frontend-service
+spec:
+  containers:
   - name: charity-api
-    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-user
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-web:latest
     env:
     - name: DATABASE_HOST
       value: "35.195.26.117" 
@@ -102,6 +127,19 @@ spec:
   type: LoadBalancer  #gives us an external IP address
   selector:
     app: backend-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: LoadBalancer  #gives us an external IP address
+  selector:
+    app: frontend-web
   ports:
     - protocol: TCP
       port: 80
