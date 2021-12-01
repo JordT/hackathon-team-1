@@ -1,0 +1,11 @@
+
+curl 
+
+get all users
+curl  35.233.40.229:80/users
+
+get all charities
+curl 34.77.117.255:80/charities 
+
+curl 130.211.106.19:80/posts
+

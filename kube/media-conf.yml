@@ -1,0 +1,36 @@
+### Media API
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sharecare-media
+  labels:
+    purpose: sharecare-app
+    app: media-api
+spec:
+  containers:
+  - name: media-api
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-media:latest
+    env:
+    - name: DATABASE_HOST
+      value: "35.195.26.117"
+    - name: DATABASE_PORT
+      value: "5432"
+    - name: DATABASE_NAME
+      value: "media"
+    - name: DATABASE_USERNAME
+      value: "postgres"
+    - name: DATABASE_PASSWORD
+      value: "hackPassword1!"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-api-service
+spec:
+  type: LoadBalancer  #gives us an external IP address
+  selector:
+    app: media-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

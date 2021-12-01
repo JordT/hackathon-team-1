@@ -1,0 +1,38 @@
+### POST API
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sharecare-post
+  labels:
+    purpose: sharecare-app
+    app: post-api
+spec:
+  containers:
+  - name: post-api
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-post:latest
+    env:
+    - name: DATABASE_HOST
+      value: "35.195.26.117" 
+    - name: DATABASE_PORT
+      value: "5432"
+    - name: DATABASE_NAME
+      value: "post"
+    - name: DATABASE_USERNAME
+      value: "postgres"
+    - name: DATABASE_PASSWORD
+      value: "hackPassword1!"
+    - name: MEDIA_SERVICE_URL
+      value: "34.76.10.56"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-api-service
+spec:
+  type: LoadBalancer  #gives us an external IP address
+  selector:
+    app: post-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

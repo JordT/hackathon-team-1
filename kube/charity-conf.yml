@@ -1,0 +1,37 @@
+### Charity API
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sharecare-charity
+  labels:
+    purpose: sharecare-app
+    app: charity-api
+spec:
+  containers:
+  - name: charity-api
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity:latest
+    env:
+    - name: DATABASE_HOST
+      value: "35.195.26.117" 
+    - name: DATABASE_PORT
+      value: "5432"
+    - name: DATABASE_NAME
+      value: "charity"
+    - name: DATABASE_USERNAME
+      value: "postgres"
+    - name: DATABASE_PASSWORD
+      value: "hackPassword1!"
+---
+### charity serivce
+apiVersion: v1
+kind: Service
+metadata:
+  name: charity-api-service
+spec:
+  type: LoadBalancer  #gives us an external IP address
+  selector:
+    app: charity-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

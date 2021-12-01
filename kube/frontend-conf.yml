@@ -1,0 +1,25 @@
+### FRONT-END
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-frontend
+  labels:
+    purpose: sharecare-app
+    app: web-frontend
+spec:
+  containers:
+  - name: web-frontend
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-web:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-frontend-service
+spec:
+  type: LoadBalancer  #gives us an external IP address
+  selector:
+    app: web-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
