@@ -61,7 +61,7 @@ kind: Service
 metadata:
   name: user-api-service
 spec:
-  type: LoadBalancer  #gives us an external IP address
+  type: NodePort  #gives us an external IP address
   selector:
     app: user-api
   ports:

@@ -37,7 +37,7 @@ kind: Service
 metadata:
   name: charity-api-service
 spec:
-  type: ClusterIP  #gives us an external IP address
+  type: NodePort  #gives us an external IP address
   selector:
     app: charity-api
   ports:

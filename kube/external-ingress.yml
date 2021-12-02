@@ -17,7 +17,7 @@ metadata:
 #             port:
 #               number: 80
 spec:
-  defaultFrontend:
+  defaultBackend:
     service:
       name: front-end
       port:

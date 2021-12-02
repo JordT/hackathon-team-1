@@ -22,25 +22,25 @@ spec:
           service:
             name: user-api-service
             port:
-              number: 80
+              number: 3000
       - path: /media/*
         pathType: ImplementationSpecific
         backend:
           service:
             name: media-api-service
             port:
-              number: 80
+              number: 3000
       - path: /posts
         pathType: ImplementationSpecific
         backend:
           service:
             name: post-api-service
             port:
-              number: 80
+              number: 3000
       - path: /charities
         pathType: ImplementationSpecific
         backend:
           service:
             name: charity-api-service
             port:
-              number: 80
+              number: 3000
