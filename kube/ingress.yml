@@ -9,38 +9,38 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /*
         pathType: ImplementationSpecific
         backend:
           service:
             name: web-frontend-service
             port:
-              number: 3000
-      - path: /user
+              number: 80
+      - path: /users
         pathType: ImplementationSpecific
         backend:
           service:
             name: user-api-service
             port:
-              number: 3000
-      - path: /media
+              number: 80
+      - path: /media/*
         pathType: ImplementationSpecific
         backend:
           service:
             name: media-api-service
             port:
-              number: 3000
-      - path: /post
+              number: 80
+      - path: /posts
         pathType: ImplementationSpecific
         backend:
           service:
             name: post-api-service
             port:
-              number: 3000
-      - path: /charity
+              number: 80
+      - path: /charities
         pathType: ImplementationSpecific
         backend:
           service:
             name: charity-api-service
             port:
-              number: 3000
+              number: 80

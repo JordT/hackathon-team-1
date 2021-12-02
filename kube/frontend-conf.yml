@@ -18,13 +18,16 @@ spec:
       containers:
       - name: frontend-api
         image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-web:latest
+        env:
+        - name: BASE_URL
+          value: "34.149.119.94" 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: web-frontend-service
 spec:
-  type: LoadBalancer  #gives us an external IP address
+  type: LoadBalancer  #clusterIP, gives it an internal IP, for loadbalancing from ingress
   selector:
     app: frontend-api
   ports:
