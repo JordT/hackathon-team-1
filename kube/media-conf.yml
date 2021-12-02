@@ -28,13 +28,15 @@ spec:
           value: "postgres"
         - name: DATABASE_PASSWORD
           value: "hackPassword1!"
+        ports:
+        - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: media-api-service
 spec:
-  type: LoadBalancer  #gives us an external IP address
+  type: ClusterIP 
   selector:
     app: media-api
   ports:

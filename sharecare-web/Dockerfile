@@ -1,6 +1,10 @@
 FROM node:12-alpine
 
-ENV PORT=80 
+ENV PORT=3000
+ENV BASE_URL=34.149.119.94
+
+RUN mkdir -p /usr/src/nuxt-app
+WORKDIR /usr/src/nuxt-app
 
 # Metadata as defined in OCI image spec annotations - https://github.com/opencontainers/image-spec/blob/master/annotations.md
 LABEL org.opencontainers.image.title="title" \
@@ -9,18 +13,29 @@ LABEL org.opencontainers.image.title="title" \
       org.opencontainers.image.vendor="LBG"
 
 # add debugging utilities
+# update and install dependency
+RUN apk update && apk upgrade
+
 RUN apk --no-cache add \
   curl \
   ca-certificates \
   jq \
   less \
-  vim
+  vim \
+  git
 
-# bundle app and install dependencies 
-COPY . /app
-WORKDIR /app
+# set app serving to permissive / assigned
+ENV NUXT_HOST=0.0.0.0
+# set app port
+ENV NUXT_PORT=3000
+
+# bundle app and install dependencies
+# WORKDIR /app
+# COPY . /app
+COPY . /usr/src/nuxt-app/
 RUN npm install
 
 # run application
 EXPOSE $PORT
-CMD npm start
+RUN npm run build
+CMD [ "npm", "start" ]

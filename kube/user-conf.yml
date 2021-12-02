@@ -53,6 +53,8 @@ spec:
           value: "postgres"
         - name: DATABASE_PASSWORD
           value: "hackPassword1!"
+        ports:
+        - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
