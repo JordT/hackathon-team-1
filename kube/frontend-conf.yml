@@ -20,17 +20,17 @@ spec:
         image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-web:latest
         env:
         - name: BASE_URL
-          value: "34.149.119.94" 
+          value: "http://34.149.119.94"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: web-frontend-service
 spec:
-  type: LoadBalancer  #clusterIP, gives it an internal IP, for loadbalancing from ingress
+  type: ClusterIP  #clusterIP, gives it an internal IP, for loadbalancing from ingress
   selector:
     app: frontend-api
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 5000

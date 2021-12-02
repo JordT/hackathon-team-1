@@ -10,7 +10,7 @@ spec:
     image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity
     env:
     - name: DATABASE_HOST
-      value: "34.78.32.157"
+      value: "35.195.26.117"
     - name: DATABASE_PORT
       value: "5432"
     - name: DATABASE_NAME

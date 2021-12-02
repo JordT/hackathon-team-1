@@ -38,8 +38,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: post-api-service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: NodePort  #gives us an external IP address
+  type: ClusterIP  #gives us an external IP address
   selector:
     app: user-api
   ports:

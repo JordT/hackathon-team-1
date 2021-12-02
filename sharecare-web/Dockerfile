@@ -1,41 +1,28 @@
-FROM node:12-alpine
+FROM node:11.13.0-alpine
 
-ENV PORT=3000
-ENV BASE_URL=34.149.119.94
-
+# create destination directory
 RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 
-# Metadata as defined in OCI image spec annotations - https://github.com/opencontainers/image-spec/blob/master/annotations.md
-LABEL org.opencontainers.image.title="title" \
-      org.opencontainers.image.description="my dockerfile" \
-      org.opencontainers.image.authors="Sam" \
-      org.opencontainers.image.vendor="LBG"
-
-# add debugging utilities
 # update and install dependency
 RUN apk update && apk upgrade
+RUN apk add git
 
-RUN apk --no-cache add \
-  curl \
-  ca-certificates \
-  jq \
-  less \
-  vim \
-  git
+# copy the app, note .dockerignore
+COPY . /usr/src/nuxt-app/
+RUN npm install
+
+# build necessary, even if no static files are needed,
+# since it builds the server as well
+RUN npm run build
+
+# expose 5000 on container
+EXPOSE 5000
 
 # set app serving to permissive / assigned
 ENV NUXT_HOST=0.0.0.0
 # set app port
-ENV NUXT_PORT=3000
+ENV NUXT_PORT=5000
 
-# bundle app and install dependencies
-# WORKDIR /app
-# COPY . /app
-COPY . /usr/src/nuxt-app/
-RUN npm install
-
-# run application
-EXPOSE $PORT
-RUN npm run build
+# start the app
 CMD [ "npm", "start" ]
