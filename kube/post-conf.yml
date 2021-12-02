@@ -39,7 +39,7 @@ kind: Service
 metadata:
   name: post-api-service
 spec:
-  type: ClusterIP  #gives us an external IP address
+  type: NodePort  #gives us an external IP address
   selector:
     app: user-api
   ports:
