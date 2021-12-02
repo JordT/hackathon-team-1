@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sharecare-charity
+  labels:
+    purpose: sharecare-app
+spec:
+  containers:
+  - name: charity-api
+    image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity
+    env:
+    - name: DATABASE_HOST
+      value: "35.195.26.117"
+    - name: DATABASE_PORT
+      value: "5432"
+    - name: DATABASE_NAME
+      value: "charity"
+    - name: DATABASE_USERNAME
+      value: "postgres"
+    - name: DATABASE_PASSWORD
+      value: "hackPassword1!"

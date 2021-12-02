@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharecare-media
+  labels:
+    app: media-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: media-api
+  template:
+    metadata:
+      labels:
+        app: media-api
+    spec:
+      containers:
+      - name: media-api
+        image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-media:latest
+        env:
+        - name: DATABASE_HOST
+          value: "35.195.26.117" 
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_NAME
+          value: "media"
+        - name: DATABASE_USERNAME
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          value: "hackPassword1!"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-api-service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIP 
+  selector:
+    app: media-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

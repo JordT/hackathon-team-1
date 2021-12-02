@@ -1,0 +1,46 @@
+### User API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharecare-user
+  labels:
+    app: user-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-api
+  template:
+    metadata:
+      labels:
+        app: user-api
+    spec:
+      containers:
+      - name: user-api
+        image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-user:latest
+        env:
+        - name: DATABASE_HOST
+          value: "35.195.26.117" 
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_NAME
+          value: "user"
+        - name: DATABASE_USERNAME
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          value: "hackPassword1!"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-api-service
+spec:
+  type: ClusterIP  #gives us an external IP address
+  selector:
+    app: user-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

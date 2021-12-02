@@ -1,0 +1,50 @@
+### POST API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharecare-post
+  labels:
+    app: post-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: post-api
+  template:
+    metadata:
+      labels:
+        app: post-api
+    spec:
+      containers:
+      - name: post-api
+        image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-post:latest
+        env:
+        - name: DATABASE_HOST
+          value: "35.195.26.117" 
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_NAME
+          value: "post"
+        - name: DATABASE_USERNAME
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          value: "hackPassword1!"
+        - name: MEDIA_SERVICE_URL
+          value: "34.76.10.56:80"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-api-service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIP  #gives us an external IP address
+  selector:
+    app: user-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
