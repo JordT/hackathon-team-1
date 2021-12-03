@@ -1,12 +1,45 @@
-apiVersion: networking.k8s.io/v1beta1
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: ingress-rules
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - backend:
+#           serviceName: web-frontend-service
+#           servicePort: 80
+#         path: /
+#       - backend:
+#           serviceName: user-api-service
+#           servicePort: 80
+#         path: /users
+      
+
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-rules
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
       paths:
-      - backend:
-          serviceName: web-frontend-service
-          servicePort: 80
-        path: /
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: web-frontend-service
+            port:
+              number: 80
+      - path: /api/users
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: user-api-service
+            port:
+              number: 80

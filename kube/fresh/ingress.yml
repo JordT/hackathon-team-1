@@ -1,0 +1,69 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-rules
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: web-frontend-service
+          servicePort: 80
+        path: /
+      - backend:
+          serviceName: charity-api-service 
+          servicePort: 80
+        path: /charities
+      - backend:
+          serviceName: user-api-service 
+          servicePort: 80
+        path: /users
+      - backend:
+          serviceName: media-api-service
+          servicePort: 80
+        path: /media
+      - backend:
+          serviceName: post-api-service  
+          servicePort: 80
+        path: /posts
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: fe-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: "gce"
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /*
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: web-frontend-service
+#             port:
+#               number: 80
+#       - path: /api/posts
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: post-api-service
+#             port:
+#               number: 80
+#       - path: /api/users
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: user-api-service
+#             port:
+#               number: 80
+#       - path: /api/charities
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: charity-api-service
+#             port:
+#               number: 80
