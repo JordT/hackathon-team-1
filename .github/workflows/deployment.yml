@@ -62,6 +62,7 @@ jobs:
         run: |-
           docker build \
             --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+            --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:latest" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
@@ -69,21 +70,24 @@ jobs:
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push "eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+          docker push "eu.gcr.io/$PROJECT_ID/$IMAGE" --all-tags
 
 #another build
 #     # Set up kustomize
-      - name: Set up Kustomize
+      - name: Rollout with kubectl
         working-directory: sharecare-user
         run: |-
-          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-          chmod u+x ./kustomize
-
-    # Deploy the Docker image to the GKE cluster
-      - name: Deploy
-        working-directory: sharecare-user
-        run: |-
-          ./kustomize edit set image eu.gcr.io/$PROJECT_ID/IMAGE:TAG=eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-          ./kustomize build . | kubectl apply -f -
+          kubectl apply -f user-conf.yml
           kubectl rollout status deployment/$DEPLOYMENT_NAME
-          kubectl get services -o wide
+
+#           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+#           chmod u+x ./kustomize
+#           ./kustomize edit set image eu.gcr.io/$PROJECT_ID/IMAGE:TAG=eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+#           ./kustomize build . | kubectl apply -f user-conf.yml
+#           kubectl rollout status deployment/$DEPLOYMENT_NAME
+#           kubectl get services -o wide
+
+#     # Deploy the Docker image to the GKE cluster
+#       - name: Deploy
+#         run: |-
+
