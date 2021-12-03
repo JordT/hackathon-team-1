@@ -1,0 +1,108 @@
+### Charity API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sharecare-charity
+  labels:
+    app: charity-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: charity-api
+  template:
+    metadata:
+      labels:
+        app: charity-api
+    spec:
+      containers:
+      - name: charity-api
+        image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity:latest
+        env:
+        - name: DATABASE_HOST
+          value: "35.195.26.117" 
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_NAME
+          value: "charity"
+        - name: DATABASE_USERNAME
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          value: "hackPassword1!"
+        ports:
+        - containerPort: 3000
+        readinessProbe:
+          initialDelaySeconds: 1
+          periodSeconds: 2
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+          httpGet:
+            host:
+            scheme: HTTP
+            path: /charities
+            port: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: charity-api-service
+spec:
+  type: NodePort  #gives us an external IP address
+  selector:
+    app: charity-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+
+
+
+# ### Charity API
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: sharecare-charity
+#   labels:
+#     app: charity-api
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: charity-api
+#   template:
+#     metadata:
+#       labels:
+#         app: charity-api
+#     spec:
+#       containers:
+#       - name: charity-api
+#         image: eu.gcr.io/lloyds-hackathon-team-1/sharecare-charity:latest
+#         env:
+#         - name: DATABASE_HOST
+#           value: "35.195.26.117" 
+#         - name: DATABASE_PORT
+#           value: "5432"
+#         - name: DATABASE_NAME
+#           value: "charity"
+#         - name: DATABASE_USERNAME
+#           value: "postgres"
+#         - name: DATABASE_PASSWORD
+#           value: "hackPassword1!"
+#         ports:
+#         - containerPort: 3000
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: charity-api-service
+#   annotations:
+#     cloud.google.com/neg: '{"ingress": true}'
+# spec:
+#   type: NodePort  #gives us an external IP address
+#   selector:
+#     app: charity-api
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 3000
