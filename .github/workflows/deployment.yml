@@ -33,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
         working-directory: sharecare-user
-      - name: runs build
-        run: npm run build
-        working-directory: sharecare-user
       - name: runs tests
         run: npm test
         working-directory: sharecare-user
