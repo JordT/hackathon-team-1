@@ -31,15 +31,24 @@ spec:
           value: "hackPassword1!"
         ports:
         - containerPort: 3000
+        readinessProbe:
+          initialDelaySeconds: 1
+          periodSeconds: 2
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+          httpGet:
+            host:
+            scheme: HTTP
+            path: /charities
+            port: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: charity-api-service
-  annotations:
-    cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: ClusterIP  #gives us an external IP address
+  type: NodePort  #gives us an external IP address
   selector:
     app: charity-api
   ports:

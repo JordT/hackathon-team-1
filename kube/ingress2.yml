@@ -10,3 +10,19 @@ spec:
           serviceName: web-frontend-service
           servicePort: 80
         path: /
+      - backend:
+          serviceName: charity-api-service 
+          servicePort: 80
+        path: /charities
+      - backend:
+          serviceName: user-api-service 
+          servicePort: 80
+        path: /users
+      - backend:
+          serviceName: media-api-service
+          servicePort: 80
+        path: /media
+      - backend:
+          serviceName: post-api-service  
+          servicePort: 80
+        path: /posts
