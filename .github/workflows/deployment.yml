@@ -33,8 +33,10 @@ jobs:
           node-version: 'v14'
       - name: Install dependencies
         run: npm ci
-      - run: npm run build
-      - run: npm test
+      - name: runs build
+        run: npm run build
+      - name: runs tests
+        run: npm test
 
 
 ### GCR Setup
