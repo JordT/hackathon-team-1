@@ -62,6 +62,7 @@ jobs:
         run: |-
           docker build \
             --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+            --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:latest"
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
@@ -69,7 +70,7 @@ jobs:
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push "eu.gcr.io/$PROJECT_ID/$IMAGE:latest"
+          docker push "eu.gcr.io/$PROJECT_ID/$IMAGE" --all-tags
 
 #another build
 #     # Set up kustomize
