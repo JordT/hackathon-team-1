@@ -81,7 +81,6 @@ jobs:
 
     # Deploy the Docker image to the GKE cluster
       - name: Deploy
-        working-directory: sharecare-user
         run: |-
           ./kustomize edit set image eu.gcr.io/$PROJECT_ID/IMAGE:TAG=eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ./kustomize build . | kubectl apply -f -
