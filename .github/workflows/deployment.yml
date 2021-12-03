@@ -58,6 +58,7 @@ jobs:
 
     # Build the Docker image
       - name: Build
+        working-directory: sharecare-user
         run: |-
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
