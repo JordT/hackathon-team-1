@@ -34,11 +34,11 @@ spec:
         ports:
         - containerPort: 3000
         readinessProbe:
-          initialDelaySeconds: 1
+          initialDelaySeconds: 15
           periodSeconds: 2
           timeoutSeconds: 1
           successThreshold: 1
-          failureThreshold: 1
+          failureThreshold: 5
           httpGet:
             host:
             scheme: HTTP
@@ -52,7 +52,7 @@ metadata:
 spec:
   type: NodePort  #gives us an external IP address
   selector:
-    app: user-api
+    app: post-api
   ports:
     - protocol: TCP
       port: 80

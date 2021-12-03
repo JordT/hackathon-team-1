@@ -31,11 +31,11 @@ spec:
         ports:
         - containerPort: 3000
         readinessProbe:
-          initialDelaySeconds: 1
+          initialDelaySeconds: 5
           periodSeconds: 2
           timeoutSeconds: 1
           successThreshold: 1
-          failureThreshold: 1
+          failureThreshold: 3
           httpGet:
             host:
             scheme: HTTP
